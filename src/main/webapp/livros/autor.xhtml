@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head></h:head>
+<h:body>
+
+
+	<h:form id="formAutor">
+		<p:fieldset legend="Cadastro de autor">
+			<p:panelGrid styleClass="ui-noborder" columns="3">
+				<p:outputLabel value="Nome:" for="nome" />
+				<p:inputText id="nome" value="#{adminAutoresBean.autor.nome}" />
+				<p:commandButton value="Salvar autor"
+				action="#{adminAutoresBean.salvar()}" update=":listaAutores" />	
+			</p:panelGrid>
+			<br></br>
+			
+
+		</p:fieldset>
+	</h:form>
+
+	<p:dataTable id="listaAutores" var="autor"
+		value="#{adminAutoresBean.listaAutores()}">
+		<p:column headerText="Nome">
+			#{autor.nome}
+		</p:column>
+	</p:dataTable>
+
+</h:body>
+</html>

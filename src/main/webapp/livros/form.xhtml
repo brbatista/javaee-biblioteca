@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+	<div class="container">
+		<h:form id="formLivro">
+			<p:fieldset legend="Dados do livro">
+				<p:panelGrid columns="1" styleClass="ui-noborder">
+					<div>
+						<p:outputLabel value="Titulo:" for="titulo" />
+						<p:inputText id="titulo" value="#{adminLivrosBean.livro.titulo}" />
+					</div>
+					<div>
+						<p:outputLabel value="Descrição:" for="descricao" />
+						<p:inputTextarea id="descricao" cols="20" rows="10"
+							value="#{adminLivrosBean.livro.descricao}" />
+					</div>
+					<div>
+						<p:outputLabel value="Número de páginas:" for="numeroPaginas" />
+						<p:inputText id="numeroPaginas"
+							value="#{adminLivrosBean.livro.numeroPaginas}" />
+					</div>
+
+
+					<div>
+						<h:outputLabel>Autores:</h:outputLabel>
+						<h:selectManyListbox
+							value="#{adminLivrosBean.idsAutoresSelecionados}"
+							converter="javax.faces.Integer">
+							<f:selectItems value="#{adminLivrosBean.autores}" var="autor"
+								itemLabel="#{autor.nome}" itemValue="#{autor.id}" />
+						</h:selectManyListbox>
+					</div>
+				</p:panelGrid>
+
+				<p:commandButton value="Salvar" action="#{adminLivrosBean.salvar()}"
+					update=":listaLivros" process="@form" />
+
+			</p:fieldset>
+		</h:form>
+
+		<p:dataTable id="listaLivros" var="livro"
+			value="#{adminLivrosBean.listaLivros()}" paginator="true" rows="10">
+			<p:column headerText="Título" sortBy="#{livro.titulo}">
+			#{livro.titulo}
+		</p:column>
+			<p:column headerText="Descrição">
+			#{livro.descricao}
+		</p:column>
+			<p:column headerText="Número de páginas">
+			#{livro.numeroPaginas}
+		</p:column>
+			<p:column headerText="Autores">
+				<ui:repeat var="autor" value="#{livro.autores}">
+				#{autor.nome}, 
+				</ui:repeat>
+			</p:column>
+		</p:dataTable>
+	</div>
+</h:body>
+</html>
