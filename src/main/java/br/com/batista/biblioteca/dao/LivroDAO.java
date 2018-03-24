@@ -20,4 +20,15 @@ public class LivroDAO {
 		return manager.createQuery("select l from Livro l",Livro.class).getResultList();
 	}
 
+	public void remover(Livro livro) {
+		Livro objeto = manager.merge(livro);
+		manager.remove(objeto);
+	}
+
+	public void atualizar(Livro livro) {
+		Livro objeto = manager.merge(livro);
+		manager.persist(objeto);
+		
+	}
+
 }

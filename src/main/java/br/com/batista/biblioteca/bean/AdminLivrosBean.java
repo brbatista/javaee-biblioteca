@@ -1,6 +1,5 @@
 package br.com.batista.biblioteca.bean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +34,29 @@ public class AdminLivrosBean {
 	@Transactional
 	public void salvar() {
 		System.out.println("Salvando livro...");
-		adicionaAutoresLivro();
-		livroDao.salvar(livro);
-		limpaFormulario();
+		
+		if(livro.getId() == null) {
+			System.out.println("livro não existe");
+			adicionaAutoresLivro();
+			livroDao.salvar(livro);
+			limpaFormulario();
+		}else {
+			System.out.println("livro já existe");
+			adicionaAutoresLivro();
+			livroDao.atualizar(livro);
+			limpaFormulario();
+		}
+		
+	}
+	
+	@Transactional
+	public void remover(Livro livro) {
+		livroDao.remover(livro);
+	}
+	
+	public void editar(Livro livro) {
+		System.out.println("Editando livro");
+		this.livro = livro;
 	}
 
 	public List<Livro> listaLivros() {

@@ -1,6 +1,8 @@
 package br.com.batista.biblioteca.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,21 +12,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-public class Livro {
+public class Livro{
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String titulo;
-	
+
 	@Lob
 	private String descricao;
 	private int numeroPaginas;
-	
+
+	@Temporal(TemporalType.DATE)
+	private Calendar dataPublicacao = Calendar.getInstance();
+
+	private String isbn;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Autor> autores = new ArrayList<Autor>();
-	
+
 	public void adicionaAutor(Autor autor) {
 		this.autores.add(autor);
 	}
@@ -61,14 +71,27 @@ public class Livro {
 		this.numeroPaginas = numeroPaginas;
 	}
 
+	public Calendar getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public void setDataPublicacao(Calendar dataPublicacao) {
+		this.dataPublicacao = dataPublicacao;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
+	}
+
 	public List<Autor> getAutores() {
 		return autores;
 	}
-
-	public void setAutores(ArrayList<Autor> autores) {
-		this.autores = autores;
-	}
-	
-	
-
 }

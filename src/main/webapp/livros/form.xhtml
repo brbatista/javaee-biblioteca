@@ -23,12 +23,24 @@
 						<p:inputTextarea id="descricao" cols="20" rows="10"
 							value="#{adminLivrosBean.livro.descricao}" />
 					</div>
+
+					<div>
+						<p:outputLabel value="ISBN" for="isbn" />
+						<p:inputMask id="isbn" value="#{adminLivrosBean.livro.isbn}"
+							mask="999-99-9999-999-9" />
+					</div>
 					<div>
 						<p:outputLabel value="Número de páginas:" for="numeroPaginas" />
 						<p:inputText id="numeroPaginas"
 							value="#{adminLivrosBean.livro.numeroPaginas}" />
 					</div>
 
+					<div>
+						<p:outputLabel value="Data de publicação:" for="data" />
+						<p:calendar id="data"
+							value="#{adminLivrosBean.livro.dataPublicacao.time}"
+							pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+					</div>
 
 					<div>
 						<h:outputLabel>Autores:</h:outputLabel>
@@ -42,28 +54,47 @@
 				</p:panelGrid>
 
 				<p:commandButton value="Salvar" action="#{adminLivrosBean.salvar()}"
-					update=":listaLivros" process="@form" />
+					update=":formTabela:listaLivros" process="@form" />
 
 			</p:fieldset>
 		</h:form>
 
-		<p:dataTable id="listaLivros" var="livro"
-			value="#{adminLivrosBean.listaLivros()}" paginator="true" rows="10">
-			<p:column headerText="Título" sortBy="#{livro.titulo}">
-			#{livro.titulo}
-		</p:column>
-			<p:column headerText="Descrição">
-			#{livro.descricao}
-		</p:column>
-			<p:column headerText="Número de páginas">
-			#{livro.numeroPaginas}
-		</p:column>
-			<p:column headerText="Autores">
-				<ui:repeat var="autor" value="#{livro.autores}">
-				#{autor.nome}, 
-				</ui:repeat>
+		<h:form id="formTabela">
+			<p:dataTable id="listaLivros" var="livro"
+				value="#{adminLivrosBean.listaLivros()}" paginator="true" rows="10">
+
+				<p:column headerText="Título" sortBy="#{livro.titulo}">
+				#{livro.titulo}
 			</p:column>
-		</p:dataTable>
+				<p:column headerText="Número de páginas">
+				#{livro.numeroPaginas}
+			</p:column>
+				<p:column headerText="ISBN">
+				#{livro.isbn}
+			</p:column>
+				<p:column headerText="Data de publicação">
+					<h:outputText value="#{livro.dataPublicacao.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Brasilia" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Autores">
+					<ui:repeat var="autor" value="#{livro.autores}">
+					#{autor.nome}, 
+				</ui:repeat>
+				</p:column>
+				<p:column>
+					<p:menuButton value="Opções">
+						<p:menuitem value="Remover"
+							actionListener="#{adminLivrosBean.remover(livro)}" update=":formTabela:listaLivros"
+							icon="ui-icon-close" />
+						<p:menuitem value="Editar"
+							actionListener="#{adminLivrosBean.editar(livro)}" 
+							icon="ui-icon-pencil" ajax="false"/>
+					</p:menuButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 	</div>
 </h:body>
 </html>
