@@ -45,6 +45,7 @@ public class AdminLivrosBean {
 			System.out.println("livro já existe");
 			adicionaAutoresLivro();
 			livroDao.atualizar(livro);
+			System.out.println("limpando formulário");
 			limpaFormulario();
 		}
 		
