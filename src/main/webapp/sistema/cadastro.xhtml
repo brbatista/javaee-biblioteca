@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+	<div class="container">
+		<h:form id="formCadastro">
+			<p:fieldset legend="Dados pessoais">
+				<div>
+					<p:outputLabel value="Nome completo:" for="nome" />
+					<p:inputText id="nome" value="#{cadastroBean.pessoa.nome}" />
+				</div>
+				<div>
+					<p:outputLabel value="Email:" for="email" />
+					<p:inputText id="email" value="#{cadastroBean.pessoa.email}" />
+				</div>
+
+				<div>
+					<p:outputLabel value="Telefone" for="telefone" />
+					<p:inputText id="telefone" value="#{cadastroBean.pessoa.telefone}" />
+				</div>
+				<div>
+					<p:outputLabel value="CPF:" for="cpf" />
+					<p:inputMask id="cpf" value="#{cadastroBean.pessoa.cpf}"
+						mask="999.999.999-99" />
+				</div>
+			</p:fieldset>
+
+			
+			<p:commandButton value="Cadastrar" action="#{cadastroBean.salvar()}" />
+		</h:form>
+
+	</div>
+</h:body>
+</html>
