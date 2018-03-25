@@ -13,27 +13,49 @@
 	<div class="container">
 		<h:form id="formCadastro">
 			<p:fieldset legend="Dados pessoais">
-				<div>
+				<p:panelGrid columns="2" styleClass="ui-noborder">
+
 					<p:outputLabel value="Nome completo:" for="nome" />
 					<p:inputText id="nome" value="#{cadastroBean.pessoa.nome}" />
-				</div>
-				<div>
+
 					<p:outputLabel value="Email:" for="email" />
 					<p:inputText id="email" value="#{cadastroBean.pessoa.email}" />
-				</div>
 
-				<div>
-					<p:outputLabel value="Telefone" for="telefone" />
+					<p:outputLabel value="Telefone:" for="telefone" />
 					<p:inputText id="telefone" value="#{cadastroBean.pessoa.telefone}" />
-				</div>
-				<div>
+
 					<p:outputLabel value="CPF:" for="cpf" />
 					<p:inputMask id="cpf" value="#{cadastroBean.pessoa.cpf}"
 						mask="999.999.999-99" />
-				</div>
+				</p:panelGrid>
 			</p:fieldset>
 
-			
+			<br />
+
+			<p:fieldset legend="Endereço">
+				<p:panelGrid columns="2" styleClass="ui-noborder">
+
+					<p:outputLabel value="CEP:" for="cep" />
+					<p:inputMask id="cep" value="#{cadastroBean.endereco.cep}"
+						mask="99999-999" />
+
+					<p:outputLabel value="Rua:" for="rua" />
+					<p:inputText id="rua" value="#{cadastroBean.endereco.rua}" />
+
+					<p:outputLabel value="Número:" for="numero" />
+					<p:inputText id="numero" value="#{cadastroBean.endereco.numero}" />
+
+					<p:outputLabel value="Bairro:" for="bairro" />
+					<p:inputText id="bairro" value="#{cadastroBean.endereco.bairro}" />
+
+					<p:outputLabel value="Cidade:" for="cidade" />
+					<p:inputText id="cidade" value="#{cadastroBean.endereco.cidade}" />
+
+					<p:outputLabel value="Estado:" for="estado" />
+					<p:inputText id="estado" value="#{cadastroBean.endereco.estado}" />
+				</p:panelGrid>
+			</p:fieldset>
+			<br/>
 			<p:commandButton value="Cadastrar" action="#{cadastroBean.salvar()}" />
 		</h:form>
 
