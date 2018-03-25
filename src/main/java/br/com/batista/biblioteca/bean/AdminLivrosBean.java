@@ -39,6 +39,7 @@ public class AdminLivrosBean {
 			System.out.println("livro não existe");
 			adicionaAutoresLivro();
 			livroDao.salvar(livro);
+			System.out.println("limpando formulário");
 			limpaFormulario();
 		}else {
 			System.out.println("livro já existe");
