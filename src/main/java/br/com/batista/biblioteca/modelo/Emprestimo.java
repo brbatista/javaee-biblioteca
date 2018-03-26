@@ -5,24 +5,32 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Emprestimo {
+public class Emprestimo{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@ManyToOne
 	private Pessoa pessoa;
-	private Calendar dataEmprestimo;
-	private Calendar dataDevolucao;
-	
+	private Calendar dataEmprestimo = Calendar.getInstance();
+	private Calendar dataDevolucao = Calendar.getInstance();
+
+	@JoinTable(
+		    name="emprestimo_livro",
+		    joinColumns=@JoinColumn(name="emprestimo_id"),
+		    inverseJoinColumns=@JoinColumn(name="livro_id")
+		)
 	@ManyToMany
 	private List<Livro> livros = new ArrayList<>();
 

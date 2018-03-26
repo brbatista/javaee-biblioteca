@@ -18,8 +18,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.spec.javax.faces</groupId>
-			<artifactId>jboss-jsf-api_2.1_spec</artifactId>
-			<scope>provided</scope>
+			<artifactId>jboss-jsf-api_2.2_spec</artifactId>
+			<version>2.2.14</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.enterprise</groupId>

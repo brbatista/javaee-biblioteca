@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
+<h:body>
+	<p:messages></p:messages>
+	<div class="container">
+		<h:form id="formEmprestimo">
+
+			<p:outputLabel for="pessoa" value="Pessoa:" />
+			<p:selectOneListbox id="pessoa"
+				value="#{emprestimoBean.emprestimo.pessoa}"
+				converter="pessoaConverter" var="pessoa" filter="true"
+				filterMatchMode="contains">
+				<f:selectItems value="#{emprestimoBean.pessoas}" var="pessoa"
+					itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" />
+
+				<p:column>
+					<h:outputText value="#{pessoa.nome}" />
+				</p:column>
+
+			</p:selectOneListbox>
+
+			<p:separator />
+
+			<p:panelGrid columns="2">
+				<p:outputLabel for="livros" value="Livros:" />
+				<p:pickList id="livros" value="#{emprestimoBean.livros}" var="livro"
+					itemValue="#{livro}" itemLabel="#{livro}" showCheckbox="true"
+					showSourceFilter="true" filterMatchMode="contains"
+					converter="livroConverter">
+					<f:facet name="sourceCaption">Disponíves</f:facet>
+					<f:facet name="targetCaption">Selecionados</f:facet>
+					
+					<p:column style="width:90%;">
+						<h:outputText value="#{livro.titulo}" />
+					</p:column>
+				</p:pickList>
+
+				<p:outputLabel value="Data de empréstimo:" for="dataEmprestimo" />
+				<p:calendar id="dataEmprestimo"
+					value="#{emprestimoBean.emprestimo.dataEmprestimo.time}"
+					pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+
+				<p:outputLabel value="Data prevista para devolução:"
+					for="dataDevolucao" />
+				<p:calendar id="dataDevolucao"
+					value="#{emprestimoBean.emprestimo.dataDevolucao.time}"
+					pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+			</p:panelGrid>
+			<p:separator />
+			<p:commandButton value="Salvar" action="#{emprestimoBean.salvar()}" update=":formEmprestimo"/>
+		</h:form>
+
+
+	</div>
+</h:body>
+</html>

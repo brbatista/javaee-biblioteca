@@ -1,6 +1,5 @@
 package br.com.batista.biblioteca.modelo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -34,6 +33,7 @@ public class Livro{
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Autor> autores = new ArrayList<Autor>();
+	
 
 	public void adicionaAutor(Autor autor) {
 		this.autores.add(autor);
@@ -94,4 +94,5 @@ public class Livro{
 	public List<Autor> getAutores() {
 		return autores;
 	}
+	
 }
