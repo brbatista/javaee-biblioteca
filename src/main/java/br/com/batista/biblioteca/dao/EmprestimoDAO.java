@@ -1,13 +1,11 @@
 package br.com.batista.biblioteca.dao;
 
-import java.io.Serializable;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import br.com.batista.biblioteca.modelo.Emprestimo;
 
-public class EmprestimoDAO implements Serializable{
+public class EmprestimoDAO{
 
 	@PersistenceContext
 	private EntityManager manager;

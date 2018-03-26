@@ -1,6 +1,5 @@
 package br.com.batista.biblioteca.bean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +18,8 @@ import br.com.batista.biblioteca.modelo.Livro;
 import br.com.batista.biblioteca.modelo.Pessoa;
 
 @Model
-public class EmprestimoBean implements Serializable {
+public class EmprestimoBean{
 
-	private static final long serialVersionUID = 1L;
 	private Emprestimo emprestimo = new Emprestimo();
 	private List<Pessoa> pessoas = new ArrayList<>();
 

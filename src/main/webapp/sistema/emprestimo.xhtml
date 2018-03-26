@@ -16,17 +16,23 @@
 
 			<p:outputLabel for="pessoa" value="Pessoa:" />
 			<p:selectOneListbox id="pessoa"
-				value="#{emprestimoBean.emprestimo.pessoa}"
-				converter="pessoaConverter" var="pessoa" filter="true"
-				filterMatchMode="contains">
+				value="#{emprestimoBean.emprestimo.pessoa}" var="p" filter="true"
+				filterMatchMode="contains" converter="pessoaConverter" style="width: 50%">
 				<f:selectItems value="#{emprestimoBean.pessoas}" var="pessoa"
 					itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" />
 
-				<p:column>
-					<h:outputText value="#{pessoa.nome}" />
+				<p:column headerText="Nome">
+					<h:outputText value="#{p.nome}" />
 				</p:column>
 
+				<p:column headerText="email">
+					<h:outputText value="#{p.email}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{p.cpf}" />
+				</p:column>
 			</p:selectOneListbox>
+			<p:message for="pessoa"></p:message>
 
 			<p:separator />
 
@@ -38,7 +44,7 @@
 					converter="livroConverter">
 					<f:facet name="sourceCaption">Disponíves</f:facet>
 					<f:facet name="targetCaption">Selecionados</f:facet>
-					
+
 					<p:column style="width:90%;">
 						<h:outputText value="#{livro.titulo}" />
 					</p:column>
@@ -56,7 +62,8 @@
 					pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
 			</p:panelGrid>
 			<p:separator />
-			<p:commandButton value="Salvar" action="#{emprestimoBean.salvar()}" update=":formEmprestimo"/>
+			<p:commandButton value="Salvar" action="#{emprestimoBean.salvar()}"
+				update=":formEmprestimo" />
 		</h:form>
 
 

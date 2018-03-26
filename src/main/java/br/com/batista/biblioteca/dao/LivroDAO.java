@@ -1,6 +1,5 @@
 package br.com.batista.biblioteca.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,7 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import br.com.batista.biblioteca.modelo.Livro;
 
-public class LivroDAO implements Serializable{
+public class LivroDAO{
 	
 	@PersistenceContext
 	private EntityManager manager;
@@ -18,7 +17,8 @@ public class LivroDAO implements Serializable{
 	}
 	
 	public List<Livro> listaLivros(){
-		return manager.createQuery("select l from Livro l",Livro.class).getResultList();
+		String jpql = "select distinct(l) from Livro l join fetch l.autores";
+		return manager.createQuery(jpql,Livro.class).getResultList();
 	}
 
 	public void remover(Livro livro) {
