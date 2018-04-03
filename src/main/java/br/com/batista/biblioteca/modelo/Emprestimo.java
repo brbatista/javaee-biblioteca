@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -33,6 +34,9 @@ public class Emprestimo {
 	@JoinTable(name = "emprestimo_livro", joinColumns = @JoinColumn(name = "emprestimo_id"), inverseJoinColumns = @JoinColumn(name = "livro_id"))
 	@ManyToMany
 	private List<Livro> livros = new ArrayList<>();
+
+	@OneToOne(mappedBy = "emprestimo")
+	private Status status;
 
 	public Integer getId() {
 		return id;
@@ -72,6 +76,14 @@ public class Emprestimo {
 
 	public void setDataDevolucao(Calendar dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }
