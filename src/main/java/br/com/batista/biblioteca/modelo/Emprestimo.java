@@ -1,5 +1,6 @@
 package br.com.batista.biblioteca.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -16,8 +17,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@SuppressWarnings("serial")
 @Entity
-public class Emprestimo {
+public class Emprestimo implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +38,14 @@ public class Emprestimo {
 	private List<Livro> livros = new ArrayList<>();
 
 	@OneToOne(mappedBy = "emprestimo")
-	private Status status;
+	private Devolucao devolucao;
+
+	public boolean isDevolvido() {
+		if (devolucao != null) {
+			return true;
+		}
+		return false;
+	}
 
 	public Integer getId() {
 		return id;
@@ -78,12 +87,12 @@ public class Emprestimo {
 		this.dataDevolucao = dataDevolucao;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Devolucao getDevolucao() {
+		return devolucao;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setDevolucao(Devolucao devolucao) {
+		this.devolucao = devolucao;
 	}
 
 }

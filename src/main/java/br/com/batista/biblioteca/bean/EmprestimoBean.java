@@ -18,7 +18,7 @@ import br.com.batista.biblioteca.modelo.Livro;
 import br.com.batista.biblioteca.modelo.Pessoa;
 
 @Model
-public class EmprestimoBean{
+public class EmprestimoBean {
 
 	private Emprestimo emprestimo = new Emprestimo();
 	private List<Pessoa> pessoas = new ArrayList<>();

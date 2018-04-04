@@ -1,36 +1,40 @@
 package br.com.batista.biblioteca.bean;
 
-import javax.enterprise.inject.Model;
+import java.io.Serializable;
+
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 
+import br.com.batista.biblioteca.dao.DevolucaoDAO;
 import br.com.batista.biblioteca.dao.EmprestimoDAO;
-import br.com.batista.biblioteca.dao.StatusDAO;
+import br.com.batista.biblioteca.modelo.Devolucao;
 import br.com.batista.biblioteca.modelo.Emprestimo;
-import br.com.batista.biblioteca.modelo.Status;
 
-@Model
-public class DevolucaoBean {
+@Named
+@ViewScoped
+public class DevolucaoBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private Emprestimo emprestimo;
 	private Integer id;
-	private Status status;
+	private Devolucao devolucao = new Devolucao();
 
 	@Inject
 	private EmprestimoDAO emprestimoDao;
 
 	@Inject
-	private StatusDAO statusDao;
+	private DevolucaoDAO devolucaoDao;
 
 	public void carregaEmprestimo() {
 		this.emprestimo = emprestimoDao.buscaPorId(id);
-		this.status = statusDao.buscaPorEmprestimo(emprestimo);
+		devolucao.setEmprestimo(emprestimo);
 	}
 
 	@Transactional
 	public String efetuaDevolucao() {
-		status.setDevolvido(true);
-		statusDao.atualizar(status);
+		devolucaoDao.salvar(devolucao);
 		return "/sistema/historico?faces-redirect=true";
 	}
 
@@ -42,12 +46,12 @@ public class DevolucaoBean {
 		this.emprestimo = emprestimo;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Devolucao getDevolucao() {
+		return devolucao;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setDevolucao(Devolucao devolucao) {
+		this.devolucao = devolucao;
 	}
 
 	public Integer getId() {

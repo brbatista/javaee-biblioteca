@@ -65,7 +65,7 @@
 		<h:form>
 			<p:outputLabel value="Data de devolução:" for="dataDevolucao" />
 			<p:calendar id="dataDevolucao"
-				value="#{devolucaoBean.status.dataDevolucao.time}"
+				value="#{devolucaoBean.devolucao.dataDevolucao.time}"
 				pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
 			<p:commandButton action="#{devolucaoBean.efetuaDevolucao()}" value="Efetuar devolução"/>
 		</h:form>

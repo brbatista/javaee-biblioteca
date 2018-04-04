@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import br.com.batista.biblioteca.modelo.Emprestimo;
-import br.com.batista.biblioteca.modelo.Status;
 
 public class EmprestimoDAO implements Serializable {
 
@@ -18,10 +17,6 @@ public class EmprestimoDAO implements Serializable {
 
 	public void salvar(Emprestimo emprestimo) {
 		manager.persist(emprestimo);
-		Status status = new Status();
-		status.setEmprestimo(emprestimo);
-		status.setDevolvido(false);
-		manager.persist(status);
 	}
 
 	public List<Emprestimo> listar() {

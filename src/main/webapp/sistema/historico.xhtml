@@ -11,7 +11,7 @@
 </h:head>
 <h:body>
 	<p:messages></p:messages>
-	<h:form>
+	<h:form id="formEmprestimos">
 
 		<p:dataTable var="emprestimo" value="#{historicoBean.emprestimos}"
 			widgetVar="emprestimoTable"
@@ -42,8 +42,8 @@
 				</h:outputText>
 			</p:column>
 
-			<p:column filterBy="#{emprestimo.status.devolvido}"
-				headerText="Status" filterMatchMode="equals">
+			<p:column filterBy="#{emprestimo.devolvido}" headerText="Status"
+				filterMatchMode="equals">
 				<f:facet name="filter">
 					<p:selectOneButton onchange="PF('emprestimoTable').filter()">
 						<f:converter converterId="javax.faces.Boolean" />
@@ -53,15 +53,16 @@
 					</p:selectOneButton>
 				</f:facet>
 				<h:outputText
-					value="#{emprestimo.status.devolvido ? 'Devolvido': 'Pendente'}" />
+					value="#{emprestimo.devolvido ? 'Devolvido': 'Pendente'}" />
 			</p:column>
 			<p:column>
 				<p:commandButton value="Efetuar devolução"
-					rendered="#{!emprestimo.status.devolvido}"
+					rendered="#{!emprestimo.devolvido}"
 					action="#{historicoBean.carregaEmprestimo(emprestimo.id)}" />
+					
 			</p:column>
-
 		</p:dataTable>
+
 	</h:form>
 </h:body>
 </html>

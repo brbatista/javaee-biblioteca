@@ -13,7 +13,7 @@ import br.com.batista.biblioteca.modelo.Emprestimo;
 
 @Named
 @ViewScoped
-public class HistoricoBean implements Serializable{
+public class HistoricoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,9 +34,9 @@ public class HistoricoBean implements Serializable{
 	public void setEmprestimos(List<Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;
 	}
-	
+
 	public String carregaEmprestimo(Integer id) {
-		return "/sistema/devolucao.xhtml?faces-redirect=true&id="+id;
+		return "/sistema/devolucao.xhtml?faces-redirect=true&id=" + id;
 	}
 
 }
