@@ -1,6 +1,8 @@
 package br.com.batista.biblioteca.bean;
 
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -20,6 +22,9 @@ public class CadastroBean {
 	
 	@Inject
 	private EnderecoDAO enderecoDao;
+	
+	@Inject
+	private FacesContext facesContext;
 
 	@Transactional
 	public void salvar() {
@@ -27,6 +32,7 @@ public class CadastroBean {
 		pessoa.setEndereco(this.endereco);
 		pessoaDao.salvar(this.pessoa);
 		limpaFormulario();
+		facesContext.addMessage(null, new FacesMessage("Pessoa gravada com sucesso"));
 	}
 	
 	public void limpaFormulario() {

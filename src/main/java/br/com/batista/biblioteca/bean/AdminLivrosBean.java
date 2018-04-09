@@ -62,6 +62,7 @@ public class AdminLivrosBean implements Serializable {
 	@Transactional
 	public void remover(Livro livro) {
 		livroDao.remover(livro);
+		facesContext.addMessage(null, new FacesMessage("Livro removido"));
 	}
 
 	public void editar(Livro livro) {

@@ -8,6 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Pessoa implements Serializable{
@@ -15,9 +19,21 @@ public class Pessoa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotBlank
+	@NotNull
 	private String nome;
+	
+	@NotBlank
+	@NotNull
 	private String email;
+	
+	@NotBlank
+	@NotNull
 	private String telefone;
+	
+	@NotBlank
+	@NotNull
 	private String cpf;
 
 	@JoinColumn(unique = true)

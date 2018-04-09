@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Endereco implements Serializable{
@@ -13,11 +16,28 @@ public class Endereco implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotBlank
+	@NotNull
 	private String rua;
+	
+	@NotBlank
+	@NotNull
 	private String cidade;
+	
+	@NotBlank
+	@NotNull
 	private String bairro;
+	
+	@NotBlank
+	@NotNull
 	private String estado;
+	
+	@NotNull
 	private Integer numero;
+	
+	@NotBlank
+	@NotNull
 	private String cep;
 
 	public Integer getId() {
