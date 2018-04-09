@@ -9,100 +9,109 @@
 <h:head>
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 </h:head>
-<h:body>
-	<div class="container">
-		<h:form id="formLivro">
-			<p:growl id="mensagem" showDetail="false" />
-			<p:fieldset legend="Dados do livro">
-				<p:panelGrid columns="1" styleClass="ui-noborder">
-					<div>
-						<p:outputLabel value="Titulo:" for="titulo" />
-						<p:inputText id="titulo" value="#{adminLivrosBean.livro.titulo}" />
-						<p:message for="titulo" />
-					</div>
-					<div>
-						<p:outputLabel value="Descrição:" for="descricao" />
-						<p:inputTextarea id="descricao" cols="20" rows="10"
-							value="#{adminLivrosBean.livro.descricao}" />
-						<p:message for="descricao" />
-					</div>
 
-					<div>
-						<p:outputLabel value="ISBN" for="isbn" />
-						<p:inputMask id="isbn" value="#{adminLivrosBean.livro.isbn}"
-							mask="999-99-9999-999-9" />
-						<p:message for="isbn" />
-					</div>
-					<div>
-						<p:outputLabel value="Número de páginas:" for="numeroPaginas" />
-						<p:inputText id="numeroPaginas"
-							value="#{adminLivrosBean.livro.numeroPaginas}" />
-						<p:message for="numeroPaginas" />
-					</div>
+<ui:composition template="/_template.xhtml">
 
-					<div>
-						<p:outputLabel value="Data de publicação:" for="data" />
-						<p:calendar id="data"
-							value="#{adminLivrosBean.livro.dataPublicacao.time}"
-							pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
-						<p:message for="data" />
-					</div>
+	<ui:define name="titulo">
 
-					<div>
-						<h:outputLabel>Autores:</h:outputLabel>
-						<h:selectManyListbox value="#{adminLivrosBean.livro.autores}"
-							converter="autorConverter" id="autores">
-							<f:attribute name="collectionType" value="java.util.ArrayList" />
-							<f:selectItems value="#{adminLivrosBean.autores}" var="autor"
-								itemLabel="#{autor.nome}" itemValue="#{autor}" />
-						</h:selectManyListbox>
-						<p:message for="autores" />
-					</div>
-				</p:panelGrid>
+	</ui:define>
 
-				<p:commandButton value="Salvar" action="#{adminLivrosBean.salvar()}"
-					update=":formTabela:listaLivros :formLivro" process="@form" />
+	<ui:define name="conteudo">
+		<div class="container">
+			<h:form id="formLivro">
+				<p:growl id="mensagem" showDetail="false" />
+				<p:fieldset legend="Dados do livro">
+					<p:panelGrid columns="1" styleClass="ui-noborder">
+						<div>
+							<p:outputLabel value="Titulo:" for="titulo" />
+							<p:inputText id="titulo" value="#{adminLivrosBean.livro.titulo}" />
+							<p:message for="titulo" />
+						</div>
+						<div>
+							<p:outputLabel value="Descrição:" for="descricao" />
+							<p:inputTextarea id="descricao" cols="20" rows="10"
+								value="#{adminLivrosBean.livro.descricao}" />
+							<p:message for="descricao" />
+						</div>
 
-			</p:fieldset>
-		</h:form>
+						<div>
+							<p:outputLabel value="ISBN" for="isbn" />
+							<p:inputMask id="isbn" value="#{adminLivrosBean.livro.isbn}"
+								mask="999-99-9999-999-9" />
+							<p:message for="isbn" />
+						</div>
+						<div>
+							<p:outputLabel value="Número de páginas:" for="numeroPaginas" />
+							<p:inputText id="numeroPaginas"
+								value="#{adminLivrosBean.livro.numeroPaginas}" />
+							<p:message for="numeroPaginas" />
+						</div>
 
-		<h:form id="formTabela">
-			<p:dataTable id="listaLivros" var="livro"
-				value="#{adminLivrosBean.listaLivros()}" paginator="true" rows="5">
+						<div>
+							<p:outputLabel value="Data de publicação:" for="data" />
+							<p:calendar id="data"
+								value="#{adminLivrosBean.livro.dataPublicacao.time}"
+								pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+							<p:message for="data" />
+						</div>
 
-				<p:column headerText="Título" sortBy="#{livro.titulo}"
-					filterBy="#{livro.titulo}">
+						<div>
+							<h:outputLabel>Autores:</h:outputLabel>
+							<h:selectManyListbox value="#{adminLivrosBean.livro.autores}"
+								converter="autorConverter" id="autores">
+								<f:attribute name="collectionType" value="java.util.ArrayList" />
+								<f:selectItems value="#{adminLivrosBean.autores}" var="autor"
+									itemLabel="#{autor.nome}" itemValue="#{autor}" />
+							</h:selectManyListbox>
+							<p:message for="autores" />
+						</div>
+					</p:panelGrid>
+
+					<p:commandButton value="Salvar"
+						action="#{adminLivrosBean.salvar()}"
+						update=":formTabela:listaLivros :formLivro" process="@form" />
+
+				</p:fieldset>
+			</h:form>
+
+			<h:form id="formTabela">
+				<p:dataTable id="listaLivros" var="livro"
+					value="#{adminLivrosBean.listaLivros()}" paginator="true" rows="5">
+
+					<p:column headerText="Título" sortBy="#{livro.titulo}"
+						filterBy="#{livro.titulo}">
 				#{livro.titulo}
 			</p:column>
-				<p:column headerText="Número de páginas">
+					<p:column headerText="Número de páginas">
 				#{livro.numeroPaginas}
 			</p:column>
-				<p:column headerText="ISBN" filterBy="#{livro.isbn}">
+					<p:column headerText="ISBN" filterBy="#{livro.isbn}">
 				#{livro.isbn}
 			</p:column>
-				<p:column headerText="Data de publicação">
-					<h:outputText value="#{livro.dataPublicacao.time}">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Brasilia" />
-					</h:outputText>
-				</p:column>
-				<p:column headerText="Autores">
-					<ui:repeat var="autor" value="#{livro.autores}">
+					<p:column headerText="Data de publicação">
+						<h:outputText value="#{livro.dataPublicacao.time}">
+							<f:convertDateTime pattern="dd/MM/yyyy"
+								timeZone="America/Brasilia" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Autores">
+						<ui:repeat var="autor" value="#{livro.autores}">
 					#{autor.nome}, 
 				</ui:repeat>
-				</p:column>
-				<p:column>
-					<p:menuButton value="Opções">
-						<p:menuitem value="Remover"
-							actionListener="#{adminLivrosBean.remover(livro)}"
-							update=":formTabela:listaLivros" icon="ui-icon-close" />
-						<p:menuitem value="Editar"
-							actionListener="#{adminLivrosBean.editar(livro)}"
-							icon="ui-icon-pencil" update="formLivro" />
-					</p:menuButton>
-				</p:column>
-			</p:dataTable>
-		</h:form>
-	</div>
-</h:body>
+					</p:column>
+					<p:column>
+						<p:menuButton value="Opções">
+							<p:menuitem value="Remover"
+								actionListener="#{adminLivrosBean.remover(livro)}"
+								update=":formTabela:listaLivros" icon="ui-icon-close" />
+							<p:menuitem value="Editar"
+								actionListener="#{adminLivrosBean.editar(livro)}"
+								icon="ui-icon-pencil" update="formLivro" />
+						</p:menuButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
 </html>

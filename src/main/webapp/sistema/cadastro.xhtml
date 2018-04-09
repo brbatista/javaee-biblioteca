@@ -10,70 +10,78 @@
 <h:head>
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 </h:head>
-<h:body>
-	<div class="container">
-		<p:growl id="growl" />
-		<h:form id="formCadastro">
-			<p:fieldset legend="Dados pessoais">
-				<p:panelGrid columns="3" styleClass="ui-noborder">
 
-					<p:outputLabel value="Nome completo:" for="nome" />
-					<p:inputText id="nome" value="#{cadastroBean.pessoa.nome}" />
-					<p:message for="nome" />
+<ui:composition template="/_template.xhtml">
 
-					<p:outputLabel value="Email:" for="email" />
-					<p:inputText id="email" value="#{cadastroBean.pessoa.email}"
-						pt:type="email" />
-					<p:message for="email" />
+	<ui:define name="titulo">
 
-					<p:outputLabel value="Telefone:" for="telefone" />
-					<p:inputText id="telefone" value="#{cadastroBean.pessoa.telefone}" />
-					<p:message for="telefone" />
+	</ui:define>
 
-					<p:outputLabel value="CPF:" for="cpf" />
-					<p:inputMask id="cpf" value="#{cadastroBean.pessoa.cpf}"
-						mask="999.999.999-99" />
-					<p:message for="cpf" />
-				</p:panelGrid>
-			</p:fieldset>
+	<ui:define name="conteudo">
+		<div class="container">
+			<p:growl id="growl" />
+			<h:form id="formCadastro">
+				<p:fieldset legend="Dados pessoais">
+					<p:panelGrid columns="3" styleClass="ui-noborder">
 
-			<br />
+						<p:outputLabel value="Nome completo:" for="nome" />
+						<p:inputText id="nome" value="#{cadastroBean.pessoa.nome}" />
+						<p:message for="nome" />
 
-			<p:fieldset legend="Endereço">
-				<p:panelGrid columns="3" styleClass="ui-noborder">
+						<p:outputLabel value="Email:" for="email" />
+						<p:inputText id="email" value="#{cadastroBean.pessoa.email}"
+							pt:type="email" />
+						<p:message for="email" />
 
-					<p:outputLabel value="CEP:" for="cep" />
-					<p:inputMask id="cep" value="#{cadastroBean.endereco.cep}"
-						mask="99999-999" />
-					<p:message for="cep" />
+						<p:outputLabel value="Telefone:" for="telefone" />
+						<p:inputText id="telefone" value="#{cadastroBean.pessoa.telefone}" />
+						<p:message for="telefone" />
 
-					<p:outputLabel value="Rua:" for="rua" />
-					<p:inputText id="rua" value="#{cadastroBean.endereco.rua}" />
-					<p:message for="rua" />
+						<p:outputLabel value="CPF:" for="cpf" />
+						<p:inputMask id="cpf" value="#{cadastroBean.pessoa.cpf}"
+							mask="999.999.999-99" />
+						<p:message for="cpf" />
+					</p:panelGrid>
+				</p:fieldset>
 
-					<p:outputLabel value="Número:" for="numero" />
-					<p:inputText id="numero" value="#{cadastroBean.endereco.numero}" />
-					<p:message for="numero" />
+				<br />
 
-					<p:outputLabel value="Bairro:" for="bairro" />
-					<p:inputText id="bairro" value="#{cadastroBean.endereco.bairro}" />
-					<p:message for="bairro" />
+				<p:fieldset legend="Endereço">
+					<p:panelGrid columns="3" styleClass="ui-noborder">
 
-					<p:outputLabel value="Cidade:" for="cidade" />
-					<p:inputText id="cidade" value="#{cadastroBean.endereco.cidade}" />
-					<p:message for="cidade" />
+						<p:outputLabel value="CEP:" for="cep" />
+						<p:inputMask id="cep" value="#{cadastroBean.endereco.cep}"
+							mask="99999-999" />
+						<p:message for="cep" />
 
-					<p:outputLabel value="Estado:" for="estado" />
-					<p:inputText id="estado" value="#{cadastroBean.endereco.estado}" />
-					<p:message for="estado" />
-				</p:panelGrid>
-			</p:fieldset>
-			<br />
-			<p:commandButton value="Cadastrar" action="#{cadastroBean.salvar()}"
-				actionListener="#{cadastroBean.mostraMensagem}"
-				update=":formCadastro :growl" />
-		</h:form>
+						<p:outputLabel value="Rua:" for="rua" />
+						<p:inputText id="rua" value="#{cadastroBean.endereco.rua}" />
+						<p:message for="rua" />
 
-	</div>
-</h:body>
+						<p:outputLabel value="Número:" for="numero" />
+						<p:inputText id="numero" value="#{cadastroBean.endereco.numero}" />
+						<p:message for="numero" />
+
+						<p:outputLabel value="Bairro:" for="bairro" />
+						<p:inputText id="bairro" value="#{cadastroBean.endereco.bairro}" />
+						<p:message for="bairro" />
+
+						<p:outputLabel value="Cidade:" for="cidade" />
+						<p:inputText id="cidade" value="#{cadastroBean.endereco.cidade}" />
+						<p:message for="cidade" />
+
+						<p:outputLabel value="Estado:" for="estado" />
+						<p:inputText id="estado" value="#{cadastroBean.endereco.estado}" />
+						<p:message for="estado" />
+					</p:panelGrid>
+				</p:fieldset>
+				<br />
+				<p:commandButton value="Cadastrar" action="#{cadastroBean.salvar()}"
+					actionListener="#{cadastroBean.mostraMensagem}"
+					update=":formCadastro :growl" />
+			</h:form>
+
+		</div>
+	</ui:define>
+</ui:composition>
 </html>

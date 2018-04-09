@@ -14,62 +14,73 @@
 <h:head>
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 </h:head>
-<h:body>
-	<p:messages></p:messages>
-	<div class="container">
-		<p:fieldset legend="Dados do devedor">
-			<p:panelGrid columns="2" styleClass="ui-noborder">
+
+<ui:composition template="/_template.xhtml">
+
+	<ui:define name="titulo">
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<p:messages></p:messages>
+		<div class="container">
+			<p:fieldset legend="Dados do devedor">
+				<p:panelGrid columns="2" styleClass="ui-noborder">
 
 
-				<p:outputLabel value="Nome completo:" for="nome" />
-				<h:outputText value="#{devolucaoBean.emprestimo.pessoa.nome}"
-					id="nome" />
+					<p:outputLabel value="Nome completo:" for="nome" />
+					<h:outputText value="#{devolucaoBean.emprestimo.pessoa.nome}"
+						id="nome" />
 
-				<p:outputLabel value="Email:" for="email" />
-				<h:outputText value="#{devolucaoBean.emprestimo.pessoa.email}"
-					id="email" />
+					<p:outputLabel value="Email:" for="email" />
+					<h:outputText value="#{devolucaoBean.emprestimo.pessoa.email}"
+						id="email" />
 
-				<p:outputLabel value="CPF:" for="cpf" />
-				<h:outputText value="#{devolucaoBean.emprestimo.pessoa.cpf}"
-					id="cpf" />
+					<p:outputLabel value="CPF:" for="cpf" />
+					<h:outputText value="#{devolucaoBean.emprestimo.pessoa.cpf}"
+						id="cpf" />
 
-			</p:panelGrid>
-		</p:fieldset>
+				</p:panelGrid>
+			</p:fieldset>
 
-		<p:fieldset legend="Dados do empréstimo">
-			<p:panelGrid columns="2" styleClass="ui-noborder">
+			<p:fieldset legend="Dados do empréstimo">
+				<p:panelGrid columns="2" styleClass="ui-noborder">
 
 
-				<p:outputLabel value="Data de empréstimo:" for="dataEmprestimo" />
-				<h:outputText
-					value="#{devolucaoBean.emprestimo.dataEmprestimo.time}"
-					id="dataEmprestimo">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Brasilia" />
-				</h:outputText>
+					<p:outputLabel value="Data de empréstimo:" for="dataEmprestimo" />
+					<h:outputText
+						value="#{devolucaoBean.emprestimo.dataEmprestimo.time}"
+						id="dataEmprestimo">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Brasilia" />
+					</h:outputText>
 
-				<p:outputLabel value="Data prevista para devolução:"
-					for="dataPrevista" />
-				<h:outputText value="#{devolucaoBean.emprestimo.dataDevolucao.time}"
-					id="dataPrevista">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Brasilia" />
-				</h:outputText>
+					<p:outputLabel value="Data prevista para devolução:"
+						for="dataPrevista" />
+					<h:outputText
+						value="#{devolucaoBean.emprestimo.dataDevolucao.time}"
+						id="dataPrevista">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Brasilia" />
+					</h:outputText>
 
-				<p:outputLabel value="Livros:" />
-				<ui:repeat var="livro" value="#{devolucaoBean.emprestimo.livros}">
+					<p:outputLabel value="Livros:" />
+					<ui:repeat var="livro" value="#{devolucaoBean.emprestimo.livros}">
 					#{livro.titulo}, 
 				</ui:repeat>
 
-			</p:panelGrid>
-		</p:fieldset>
+				</p:panelGrid>
+			</p:fieldset>
 
-		<h:form>
-			<p:outputLabel value="Data de devolução:" for="dataDevolucao" />
-			<p:calendar id="dataDevolucao"
-				value="#{devolucaoBean.devolucao.dataDevolucao.time}"
-				pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
-			<p:commandButton action="#{devolucaoBean.efetuaDevolucao()}" value="Efetuar devolução"/>
-		</h:form>
-	</div>
-
-</h:body>
+			<h:form>
+				<p:outputLabel value="Data de devolução:" for="dataDevolucao" />
+				<p:calendar id="dataDevolucao"
+					value="#{devolucaoBean.devolucao.dataDevolucao.time}"
+					pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+				<p:commandButton action="#{devolucaoBean.efetuaDevolucao()}"
+					value="Efetuar devolução" />
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
 </html>

@@ -9,66 +9,72 @@
 <h:head>
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 </h:head>
-<h:body>
-	<p:messages></p:messages>
-	<div class="container">
-		<h:form id="formEmprestimo">
+<ui:composition template="/_template.xhtml">
 
-			<p:outputLabel for="pessoa" value="Pessoa:" />
-			<p:selectOneListbox id="pessoa"
-				value="#{emprestimoBean.emprestimo.pessoa}" var="p" filter="true"
-				filterMatchMode="contains" converter="pessoaConverter" style="width: 50%">
-				<f:selectItems value="#{emprestimoBean.pessoas}" var="pessoa"
-					itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" />
-					<p:message for="pessoa"/>
+	<ui:define name="titulo">
 
-				<p:column headerText="Nome">
-					<h:outputText value="#{p.nome}" />
-				</p:column>
+	</ui:define>
 
-				<p:column headerText="email">
-					<h:outputText value="#{p.email}" />
-				</p:column>
-				<p:column headerText="Nome">
-					<h:outputText value="#{p.cpf}" />
-				</p:column>
-			</p:selectOneListbox>
-			<p:message for="pessoa"></p:message>
+	<ui:define name="conteudo">
+		<div class="container">
+			<h:form id="formEmprestimo">
+				<p:messages></p:messages>
+				<p:outputLabel for="pessoa" value="Pessoa:" />
+				<p:selectOneListbox id="pessoa"
+					value="#{emprestimoBean.emprestimo.pessoa}" var="p" filter="true"
+					filterMatchMode="contains" converter="pessoaConverter"
+					style="width: 50%">
+					<f:selectItems value="#{emprestimoBean.pessoas}" var="pessoa"
+						itemLabel="#{pessoa.nome}" itemValue="#{pessoa}" />
+					<p:message for="pessoa" />
 
-			<p:separator />
-
-			<p:panelGrid columns="2">
-				<p:outputLabel for="livros" value="Livros:" />
-				<p:pickList id="livros" value="#{emprestimoBean.livros}" var="livro"
-					itemValue="#{livro}" itemLabel="#{livro}" showCheckbox="true"
-					showSourceFilter="true" filterMatchMode="contains"
-					converter="livroConverter">
-					<f:facet name="sourceCaption">Disponíves</f:facet>
-					<f:facet name="targetCaption">Selecionados</f:facet>
-
-					<p:column style="width:90%;">
-						<h:outputText value="#{livro.titulo}" />
+					<p:column headerText="Nome">
+						<h:outputText value="#{p.nome}" />
 					</p:column>
-				</p:pickList>
-				<p:message for="livros"/>
 
-				<p:outputLabel value="Data de empréstimo:" for="dataEmprestimo" />
-				<p:calendar id="dataEmprestimo"
-					value="#{emprestimoBean.emprestimo.dataEmprestimo.time}"
-					pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+					<p:column headerText="email">
+						<h:outputText value="#{p.email}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{p.cpf}" />
+					</p:column>
+				</p:selectOneListbox>
+				<p:message for="pessoa"></p:message>
 
-				<p:outputLabel value="Data prevista para devolução:"
-					for="dataDevolucao" />
-				<p:calendar id="dataDevolucao"
-					value="#{emprestimoBean.emprestimo.dataDevolucao.time}"
-					pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
-			</p:panelGrid>
-			<p:separator />
-			<p:commandButton value="Salvar" action="#{emprestimoBean.salvar()}"
-				update=":formEmprestimo" />
-		</h:form>
+				<p:separator />
+
+				<p:panelGrid columns="2">
+					<p:outputLabel for="livros" value="Livros:" />
+					<p:pickList id="livros" value="#{emprestimoBean.livros}"
+						var="livro" itemValue="#{livro}" itemLabel="#{livro.titulo}"
+						showCheckbox="true" showSourceFilter="true" showTargetFilter="true"
+						filterMatchMode="contains" responsive="true" converter="livroConverter">
+						<f:facet name="sourceCaption">Disponíves</f:facet>
+						<f:facet name="targetCaption">Selecionados</f:facet>
+
+						<p:column style="width:90%;">
+							<h:outputText value="#{livro.titulo}" />
+						</p:column>
+					</p:pickList>
+
+					<p:outputLabel value="Data de empréstimo:" for="dataEmprestimo" />
+					<p:calendar id="dataEmprestimo"
+						value="#{emprestimoBean.emprestimo.dataEmprestimo.time}"
+						pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+
+					<p:outputLabel value="Data prevista para devolução:"
+						for="dataDevolucao" />
+					<p:calendar id="dataDevolucao"
+						value="#{emprestimoBean.emprestimo.dataDevolucao.time}"
+						pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+				</p:panelGrid>
+				<p:separator/>
+				<p:commandButton value="Salvar" action="#{emprestimoBean.salvar()}"
+					update=":formEmprestimo" />
+			</h:form>
 
 
-	</div>
-</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
 </html>

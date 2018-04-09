@@ -9,60 +9,69 @@
 <h:head>
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 </h:head>
-<h:body>
-	<p:messages></p:messages>
-	<h:form id="formEmprestimos">
 
-		<p:dataTable var="emprestimo" value="#{historicoBean.emprestimos}"
-			widgetVar="emprestimoTable"
-			emptyMessage="Nenhum empréstimo encontrado nessa categoria">
+<ui:composition template="/_template.xhtml">
 
-			<p:column filterBy="#{emprestimo.pessoa.nome}" headerText="Nome"
-				filterMatchMode="contains" sortBy="#{emprestimo.pessoa.nome}">
-				<h:outputText value="#{emprestimo.pessoa.nome}" />
-			</p:column>
-			<p:column headerText="Livros">
-				<ui:repeat var="livro" value="#{emprestimo.livros}">
+	<ui:define name="titulo">
+
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="formEmprestimos">
+			<p:messages></p:messages>
+			<p:dataTable var="emprestimo" value="#{historicoBean.emprestimos}"
+				widgetVar="emprestimoTable"
+				emptyMessage="Nenhum empréstimo encontrado nessa categoria">
+
+				<p:column filterBy="#{emprestimo.pessoa.nome}" headerText="Nome"
+					filterMatchMode="contains" sortBy="#{emprestimo.pessoa.nome}">
+					<h:outputText value="#{emprestimo.pessoa.nome}" />
+				</p:column>
+				<p:column headerText="Livros">
+					<ui:repeat var="livro" value="#{emprestimo.livros}">
 					#{livro.titulo}, 
 				</ui:repeat>
-			</p:column>
+				</p:column>
 
-			<p:column filterBy="#{emprestimo.dataEmprestimo.time}"
-				headerText="Data de empréstimo"
-				sortBy="#{emprestimo.dataEmprestimo.time}">
-				<h:outputText value="#{emprestimo.dataEmprestimo.time}">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Brasilia" />
-				</h:outputText>
-			</p:column>
-			<p:column filterBy="#{emprestimo.dataDevolucao.time}"
-				headerText="Data prevista para devolução"
-				sortBy="#{emprestimo.dataDevolucao.time}">
-				<h:outputText value="#{emprestimo.dataDevolucao.time}">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Brasilia" />
-				</h:outputText>
-			</p:column>
+				<p:column filterBy="#{emprestimo.dataEmprestimo.time}"
+					headerText="Data de empréstimo"
+					sortBy="#{emprestimo.dataEmprestimo.time}">
+					<h:outputText value="#{emprestimo.dataEmprestimo.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Brasilia" />
+					</h:outputText>
+				</p:column>
+				<p:column filterBy="#{emprestimo.dataDevolucao.time}"
+					headerText="Data prevista para devolução"
+					sortBy="#{emprestimo.dataDevolucao.time}">
+					<h:outputText value="#{emprestimo.dataDevolucao.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy"
+							timeZone="America/Brasilia" />
+					</h:outputText>
+				</p:column>
 
-			<p:column filterBy="#{emprestimo.devolvido}" headerText="Status"
-				filterMatchMode="equals">
-				<f:facet name="filter">
-					<p:selectOneButton onchange="PF('emprestimoTable').filter()">
-						<f:converter converterId="javax.faces.Boolean" />
-						<f:selectItem itemLabel="Tudo" itemValue="" />
-						<f:selectItem itemLabel="Devol." itemValue="true" />
-						<f:selectItem itemLabel="Pend." itemValue="false" />
-					</p:selectOneButton>
-				</f:facet>
-				<h:outputText
-					value="#{emprestimo.devolvido ? 'Devolvido': 'Pendente'}" />
-			</p:column>
-			<p:column>
-				<p:commandButton value="Efetuar devolução"
-					rendered="#{!emprestimo.devolvido}"
-					action="#{historicoBean.carregaEmprestimo(emprestimo.id)}" />
-					
-			</p:column>
-		</p:dataTable>
+				<p:column filterBy="#{emprestimo.devolvido}" headerText="Status"
+					filterMatchMode="equals">
+					<f:facet name="filter">
+						<p:selectOneButton onchange="PF('emprestimoTable').filter()">
+							<f:converter converterId="javax.faces.Boolean" />
+							<f:selectItem itemLabel="Tudo" itemValue="" />
+							<f:selectItem itemLabel="Devol." itemValue="true" />
+							<f:selectItem itemLabel="Pend." itemValue="false" />
+						</p:selectOneButton>
+					</f:facet>
+					<h:outputText
+						value="#{emprestimo.devolvido ? 'Devolvido': 'Pendente'}" />
+				</p:column>
+				<p:column>
+					<p:commandButton value="Efetuar devolução"
+						rendered="#{!emprestimo.devolvido}"
+						action="#{historicoBean.carregaEmprestimo(emprestimo.id)}" />
 
-	</h:form>
-</h:body>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
