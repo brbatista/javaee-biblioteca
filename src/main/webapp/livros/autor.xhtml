@@ -10,28 +10,40 @@
 
 
 	<h:form id="formAutor">
-	<p:messages></p:messages>
+		<p:growl id="mensagem" showDetail="false" />
 		<p:fieldset legend="Cadastro de autor">
 			<p:panelGrid styleClass="ui-noborder" columns="3">
 				<p:outputLabel value="Nome:" for="nome" />
 				<p:inputText id="nome" value="#{adminAutoresBean.autor.nome}" />
-				<p:message for="nome"/>
-				
+				<p:message for="nome" />
+
 				<p:commandButton value="Salvar autor"
-				action="#{adminAutoresBean.salvar()}" update=":listaAutores" />	
+					action="#{adminAutoresBean.salvar()}" update=":formTabela:listaAutores :formAutor" />
 			</p:panelGrid>
 			<br></br>
-			
+
 
 		</p:fieldset>
 	</h:form>
 
-	<p:dataTable id="listaAutores" var="autor"
-		value="#{adminAutoresBean.listaAutores()}">
-		<p:column headerText="Nome">
+	<h:form id="formTabela">
+		<p:dataTable id="listaAutores" var="autor"
+			value="#{adminAutoresBean.listaAutores()}">
+			<p:column headerText="Nome">
 			#{autor.nome}
 		</p:column>
-	</p:dataTable>
+			<p:column>
+				<p:menuButton value="Opções">
+					<p:menuitem value="Remover"
+						actionListener="#{adminAutoresBean.remover(autor)}"
+						update=":formTabela:listaAutores :formAutor" icon="ui-icon-close" />
+					<p:menuitem value="Editar"
+						actionListener="#{adminAutoresBean.editar(autor)}"
+						icon="ui-icon-pencil" update=":formAutor" />
+				</p:menuButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
 
 </h:body>
 </html>

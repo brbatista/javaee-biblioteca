@@ -52,6 +52,7 @@
 						<h:outputLabel>Autores:</h:outputLabel>
 						<h:selectManyListbox value="#{adminLivrosBean.livro.autores}"
 							converter="autorConverter" id="autores">
+							<f:attribute name="collectionType" value="java.util.ArrayList" />
 							<f:selectItems value="#{adminLivrosBean.autores}" var="autor"
 								itemLabel="#{autor.nome}" itemValue="#{autor}" />
 						</h:selectManyListbox>
@@ -97,7 +98,7 @@
 							update=":formTabela:listaLivros" icon="ui-icon-close" />
 						<p:menuitem value="Editar"
 							actionListener="#{adminLivrosBean.editar(livro)}"
-							icon="ui-icon-pencil" ajax="false" />
+							icon="ui-icon-pencil" update="formLivro" />
 					</p:menuButton>
 				</p:column>
 			</p:dataTable>

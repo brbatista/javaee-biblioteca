@@ -19,12 +19,11 @@ import br.com.batista.biblioteca.modelo.Livro;
 
 @ViewScoped
 @Named
-public class AdminLivrosBean implements Serializable{
+public class AdminLivrosBean implements Serializable {
 
 	private Livro livro = new Livro();
-	private List<Integer> idsAutoresSelecionados = new ArrayList<>();
 	private List<Autor> autores = new ArrayList<>();
-	
+
 	@Inject
 	private FacesContext facesContext;
 
@@ -45,27 +44,26 @@ public class AdminLivrosBean implements Serializable{
 			System.out.println(autor.getNome());
 		}
 		System.out.println("Salvando livro...");
-		
-		if(livro.getId() == null) {
+
+		if (livro.getId() == null) {
 			System.out.println("livro não existe");
 			livroDao.salvar(livro);
 			limpaFormulario();
 			facesContext.addMessage(null, new FacesMessage("Livro salvo com sucesso"));
-		}else {
+		} else {
 			System.out.println("livro já existe");
-			adicionaAutoresLivro();
 			livroDao.atualizar(livro);
 			limpaFormulario();
 			facesContext.addMessage(null, new FacesMessage("Livro atualizado com sucesso"));
 		}
-		
+
 	}
-	
+
 	@Transactional
 	public void remover(Livro livro) {
 		livroDao.remover(livro);
 	}
-	
+
 	public void editar(Livro livro) {
 		System.out.println("Editando livro");
 		this.livro = livro;
@@ -75,27 +73,12 @@ public class AdminLivrosBean implements Serializable{
 		return livroDao.listaLivros();
 	}
 
-	private void adicionaAutoresLivro() {
-		for (Integer id : idsAutoresSelecionados) {
-			this.livro.adicionaAutor(new Autor(id));
-		}
-	}
-
 	public void limpaFormulario() {
 		this.livro = new Livro();
-		this.idsAutoresSelecionados = new ArrayList<>();
 	}
 
 	public List<Autor> getAutores() {
 		return autores;
-	}
-
-	public List<Integer> getIdsAutoresSelecionados() {
-		return idsAutoresSelecionados;
-	}
-
-	public void setIdsAutoresSelecionados(List<Integer> idsAutoresSelecionados) {
-		this.idsAutoresSelecionados = idsAutoresSelecionados;
 	}
 
 	public Livro getLivro() {

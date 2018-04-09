@@ -20,4 +20,14 @@ public class AutorDAO implements Serializable{
 	public List<Autor> listaAutores() {
 		return manager.createQuery("select a from Autor a", Autor.class).getResultList();
 	}
+
+	public void remover(Autor autor) {
+		manager.remove(manager.merge(autor));
+		
+	}
+
+	public void atualizar(Autor autor) {
+		manager.persist(manager.merge(autor));
+		
+	}
 }
