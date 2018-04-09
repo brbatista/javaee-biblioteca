@@ -6,51 +6,52 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head></h:head>
+<h:head>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+</h:head>
 
 <ui:composition template="/_template.xhtml">
 
 	<ui:define name="titulo"></ui:define>
 
-		<ui:define name="conteudo">
+	<ui:define name="conteudo">
 
-			<h:form id="formAutor">
-				<p:growl id="mensagem" showDetail="false" />
-				<p:fieldset legend="Cadastro de autor">
-					<p:panelGrid styleClass="ui-noborder" columns="3">
-						<p:outputLabel value="Nome:" for="nome" />
-						<p:inputText id="nome" value="#{adminAutoresBean.autor.nome}" />
-						<p:message for="nome" />
+		<h:form id="formAutor">
+			<p:growl id="mensagem" showDetail="false" />
+			<p:fieldset legend="Cadastro de autor">
+				<p:panelGrid styleClass="ui-noborder" columns="3">
+					<p:outputLabel value="Nome:" for="nome" />
+					<p:inputText id="nome" value="#{adminAutoresBean.autor.nome}" />
+					<p:message for="nome" />
 
-						<p:commandButton value="Salvar autor"
-							action="#{adminAutoresBean.salvar()}"
-							update=":formTabela:listaAutores :formAutor" />
-					</p:panelGrid>
-					<br></br>
+					<p:commandButton value="Salvar autor"
+						action="#{adminAutoresBean.salvar()}"
+						update=":formTabela:listaAutores :formAutor" />
+				</p:panelGrid>
+				<br></br>
 
 
-				</p:fieldset>
-			</h:form>
+			</p:fieldset>
+		</h:form>
 
-			<h:form id="formTabela">
-				<p:dataTable id="listaAutores" var="autor"
-					value="#{adminAutoresBean.listaAutores()}">
-					<p:column headerText="Nome">
+		<h:form id="formTabela">
+			<p:dataTable id="listaAutores" var="autor"
+				value="#{adminAutoresBean.listaAutores()}">
+				<p:column headerText="Nome">
 			#{autor.nome}
 		</p:column>
-					<p:column>
-						<p:menuButton value="Opções">
-							<p:menuitem value="Remover"
-								actionListener="#{adminAutoresBean.remover(autor)}"
-								update=":formTabela:listaAutores :formAutor"
-								icon="ui-icon-close" />
-							<p:menuitem value="Editar"
-								actionListener="#{adminAutoresBean.editar(autor)}"
-								icon="ui-icon-pencil" update=":formAutor" />
-						</p:menuButton>
-					</p:column>
-				</p:dataTable>
-			</h:form>
-		</ui:define>
+				<p:column>
+					<p:menuButton value="Opções">
+						<p:menuitem value="Remover"
+							actionListener="#{adminAutoresBean.remover(autor)}"
+							update=":formTabela:listaAutores :formAutor" icon="ui-icon-close" />
+						<p:menuitem value="Editar"
+							actionListener="#{adminAutoresBean.editar(autor)}"
+							icon="ui-icon-pencil" update=":formAutor" />
+					</p:menuButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
 </ui:composition>
 </html>

@@ -6,11 +6,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head />
+<h:head>
+</h:head>
 <h:body>
-	<div id="menu">
-		<h:form id="formMenu">
-			<p:tabMenu activeIndex="#{param.i}">
+	<div class="menu-template">
+		<h:form>
+			<p:tabMenu activeIndex="#{param.i}" style="padding-top:0px;">
 				<p:menuitem value="Cadastro de pessoas"
 					outcome="/sistema/cadastro.xhtml" icon="ui-icon-person">
 					<f:param name="i" value="0" />
@@ -27,14 +28,14 @@
 					icon="ui-icon-search">
 					<f:param name="i" value="3" />
 				</p:menuitem>
-				<p:menuitem value="Cadastro de autores" outcome="/livros/autor.xhtml"
-					icon="ui-icon-search">
+				<p:menuitem value="Cadastro de autores"
+					outcome="/livros/autor.xhtml" icon="ui-icon-search">
 					<f:param name="i" value="4" />
 				</p:menuitem>
 			</p:tabMenu>
 		</h:form>
 	</div>
-<br></br>
+	<br></br>
 	<ui:insert name="titulo"></ui:insert>
 
 	<ui:insert name="conteudo"></ui:insert>
