@@ -1,11 +1,15 @@
 package br.com.batista.biblioteca.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import br.com.batista.biblioteca.dao.AutorDAO;
@@ -13,12 +17,16 @@ import br.com.batista.biblioteca.dao.LivroDAO;
 import br.com.batista.biblioteca.modelo.Autor;
 import br.com.batista.biblioteca.modelo.Livro;
 
-@Model
-public class AdminLivrosBean {
+@ViewScoped
+@Named
+public class AdminLivrosBean implements Serializable{
 
 	private Livro livro = new Livro();
 	private List<Integer> idsAutoresSelecionados = new ArrayList<>();
 	private List<Autor> autores = new ArrayList<>();
+	
+	@Inject
+	private FacesContext facesContext;
 
 	@Inject
 	private LivroDAO livroDao;
@@ -33,18 +41,22 @@ public class AdminLivrosBean {
 
 	@Transactional
 	public void salvar() {
+		for (Autor autor : autores) {
+			System.out.println(autor.getNome());
+		}
 		System.out.println("Salvando livro...");
 		
 		if(livro.getId() == null) {
 			System.out.println("livro não existe");
-			adicionaAutoresLivro();
 			livroDao.salvar(livro);
 			limpaFormulario();
+			facesContext.addMessage(null, new FacesMessage("Livro salvo com sucesso"));
 		}else {
 			System.out.println("livro já existe");
 			adicionaAutoresLivro();
 			livroDao.atualizar(livro);
 			limpaFormulario();
+			facesContext.addMessage(null, new FacesMessage("Livro atualizado com sucesso"));
 		}
 		
 	}

@@ -23,8 +23,8 @@ public class EmprestimoBean {
 	private Emprestimo emprestimo = new Emprestimo();
 	private List<Pessoa> pessoas = new ArrayList<>();
 
-	private List<Livro> source;
-	private List<Livro> target;
+	private List<Livro> source = new ArrayList<>();
+	private List<Livro> target = new ArrayList<>();
 	private DualListModel<Livro> livros;
 
 	@Inject
@@ -53,7 +53,6 @@ public class EmprestimoBean {
 	public void carregar() {
 		this.pessoas = pessoaDao.listar();
 		source = livroDao.listaLivros();
-		target = new ArrayList<>();
 		livros = new DualListModel<Livro>(source, target);
 	}
 

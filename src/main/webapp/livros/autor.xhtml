@@ -10,10 +10,13 @@
 
 
 	<h:form id="formAutor">
+	<p:messages></p:messages>
 		<p:fieldset legend="Cadastro de autor">
 			<p:panelGrid styleClass="ui-noborder" columns="3">
 				<p:outputLabel value="Nome:" for="nome" />
 				<p:inputText id="nome" value="#{adminAutoresBean.autor.nome}" />
+				<p:message for="nome"/>
+				
 				<p:commandButton value="Salvar autor"
 				action="#{adminAutoresBean.salvar()}" update=":listaAutores" />	
 			</p:panelGrid>

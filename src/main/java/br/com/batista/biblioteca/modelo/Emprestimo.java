@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @SuppressWarnings("serial")
 @Entity
@@ -26,6 +28,7 @@ public class Emprestimo implements Serializable {
 	private Integer id;
 
 	@ManyToOne
+	@NotNull
 	private Pessoa pessoa;
 
 	@Temporal(TemporalType.DATE)

@@ -1,5 +1,6 @@
 package br.com.batista.biblioteca.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,7 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import br.com.batista.biblioteca.modelo.Livro;
 
-public class LivroDAO{
+public class LivroDAO implements Serializable{
 	
 	@PersistenceContext
 	private EntityManager manager;

@@ -1,5 +1,6 @@
 package br.com.batista.biblioteca.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -12,22 +13,36 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Livro{
+public class Livro implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotBlank
+	@NotNull
 	private String titulo;
 
 	@Lob
+	@NotBlank
+	@NotNull
 	private String descricao;
+	
+	@Min(100)
 	private int numeroPaginas;
 
 	@Temporal(TemporalType.DATE)
 	private Calendar dataPublicacao = Calendar.getInstance();
 
+	@NotBlank
+	@NotNull
 	private String isbn;
 
 	@ManyToMany
