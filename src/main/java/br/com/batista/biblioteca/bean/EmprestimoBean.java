@@ -23,15 +23,13 @@ import br.com.batista.biblioteca.modelo.Pessoa;
 
 @ViewScoped
 @Named
-public class EmprestimoBean implements Serializable{
+public class EmprestimoBean implements Serializable {
 
 	private Emprestimo emprestimo = new Emprestimo();
-	private List<Pessoa> pessoas = new ArrayList<>();
+	private List<Pessoa> pessoas;
 
-	private List<Livro> source = new ArrayList<>();
-	private List<Livro> target = new ArrayList<>();
 	private DualListModel<Livro> livros;
-	
+
 	@Inject
 	private FacesContext facesContext;
 
@@ -61,8 +59,7 @@ public class EmprestimoBean implements Serializable{
 	@PostConstruct
 	public void carregar() {
 		this.pessoas = pessoaDao.listar();
-		source = livroDao.listaLivros();
-		livros = new DualListModel<Livro>(source, target);
+		livros = new DualListModel<Livro>(livroDao.listaLivros(), new ArrayList<>());
 	}
 
 	public Emprestimo getEmprestimo() {
@@ -87,22 +84,6 @@ public class EmprestimoBean implements Serializable{
 
 	public void setPessoas(List<Pessoa> pessoas) {
 		this.pessoas = pessoas;
-	}
-
-	public List<Livro> getSource() {
-		return source;
-	}
-
-	public void setSource(List<Livro> source) {
-		this.source = source;
-	}
-
-	public List<Livro> getTarget() {
-		return target;
-	}
-
-	public void setTarget(List<Livro> target) {
-		this.target = target;
 	}
 
 }

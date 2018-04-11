@@ -19,8 +19,4 @@ public class DevolucaoDAO implements Serializable {
 		manager.persist(devolucao);
 	}
 
-	public Devolucao buscaPorEmprestimo(Emprestimo emprestimo) {
-		String jpql = "select d from Devolucao d where d.emprestimo = :emprestimo";
-		return manager.createQuery(jpql, Devolucao.class).setParameter("emprestimo", emprestimo).getSingleResult();
-	}
 }

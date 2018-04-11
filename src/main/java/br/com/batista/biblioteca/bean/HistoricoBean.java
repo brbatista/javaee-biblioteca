@@ -15,8 +15,6 @@ import br.com.batista.biblioteca.modelo.Emprestimo;
 @ViewScoped
 public class HistoricoBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
 	private List<Emprestimo> emprestimos;
 
 	@Inject

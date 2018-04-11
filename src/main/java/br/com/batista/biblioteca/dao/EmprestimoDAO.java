@@ -10,8 +10,6 @@ import br.com.batista.biblioteca.modelo.Emprestimo;
 
 public class EmprestimoDAO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	@PersistenceContext
 	private EntityManager manager;
 
@@ -25,7 +23,7 @@ public class EmprestimoDAO implements Serializable {
 	}
 
 	public Emprestimo buscaPorId(Integer id) {
-		String jpql = "select e from Emprestimo e " + "join fetch e.livros "+ "where e.id = :id";
+		String jpql = "select e from Emprestimo e " + "join fetch e.livros " + "where e.id = :id";
 		return manager.createQuery(jpql, Emprestimo.class).setParameter("id", id).getSingleResult();
 	}
 }

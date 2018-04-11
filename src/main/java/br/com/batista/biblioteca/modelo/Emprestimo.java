@@ -17,9 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
@@ -36,7 +33,7 @@ public class Emprestimo implements Serializable {
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Calendar dataEmprestimo = Calendar.getInstance();
-	
+
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Calendar dataDevolucao = Calendar.getInstance();

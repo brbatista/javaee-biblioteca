@@ -18,7 +18,6 @@ import br.com.batista.biblioteca.modelo.Emprestimo;
 @ViewScoped
 public class DevolucaoBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	private Emprestimo emprestimo;
 	private Integer id;
 	private Devolucao devolucao = new Devolucao();
@@ -40,10 +39,10 @@ public class DevolucaoBean implements Serializable {
 	@Transactional
 	public String efetuaDevolucao() {
 		devolucaoDao.salvar(devolucao);
-		
+
 		facesContext.getExternalContext().getFlash().setKeepMessages(true);
 		facesContext.addMessage(null, new FacesMessage("Devolução efetuada com sucesso"));
-		
+
 		return "/sistema/historico?faces-redirect=true";
 	}
 
