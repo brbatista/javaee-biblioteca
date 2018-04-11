@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @SuppressWarnings("serial")
 @Entity
 public class Emprestimo implements Serializable {
@@ -31,13 +33,17 @@ public class Emprestimo implements Serializable {
 	@NotNull
 	private Pessoa pessoa;
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Calendar dataEmprestimo = Calendar.getInstance();
+	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	private Calendar dataDevolucao = Calendar.getInstance();
 
 	@JoinTable(name = "emprestimo_livro", joinColumns = @JoinColumn(name = "emprestimo_id"), inverseJoinColumns = @JoinColumn(name = "livro_id"))
 	@ManyToMany
+	@NotNull
 	private List<Livro> livros = new ArrayList<>();
 
 	@OneToOne(mappedBy = "emprestimo")

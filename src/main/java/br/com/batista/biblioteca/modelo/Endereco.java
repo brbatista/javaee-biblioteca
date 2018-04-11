@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Endereco implements Serializable{
@@ -34,6 +35,7 @@ public class Endereco implements Serializable{
 	private String estado;
 	
 	@NotNull
+	@NotBlank
 	private Integer numero;
 	
 	@NotBlank

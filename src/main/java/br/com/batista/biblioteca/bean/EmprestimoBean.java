@@ -1,11 +1,15 @@
 package br.com.batista.biblioteca.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 
 import org.primefaces.model.DualListModel;
@@ -17,8 +21,9 @@ import br.com.batista.biblioteca.modelo.Emprestimo;
 import br.com.batista.biblioteca.modelo.Livro;
 import br.com.batista.biblioteca.modelo.Pessoa;
 
-@Model
-public class EmprestimoBean {
+@ViewScoped
+@Named
+public class EmprestimoBean implements Serializable{
 
 	private Emprestimo emprestimo = new Emprestimo();
 	private List<Pessoa> pessoas = new ArrayList<>();
@@ -26,6 +31,9 @@ public class EmprestimoBean {
 	private List<Livro> source = new ArrayList<>();
 	private List<Livro> target = new ArrayList<>();
 	private DualListModel<Livro> livros;
+	
+	@Inject
+	private FacesContext facesContext;
 
 	@Inject
 	private EmprestimoDAO emprestimoDao;
@@ -41,6 +49,7 @@ public class EmprestimoBean {
 		emprestimo.setLivros(livros.getTarget());
 		System.out.println("Gravando emprestimo");
 		emprestimoDao.salvar(emprestimo);
+		facesContext.addMessage(null, new FacesMessage("Empréstimo gravado com sucesso"));
 		limpaFormulario();
 	}
 

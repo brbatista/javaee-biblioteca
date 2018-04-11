@@ -21,7 +21,8 @@
 			<p:messages></p:messages>
 			<p:dataTable var="emprestimo" value="#{historicoBean.emprestimos}"
 				widgetVar="emprestimoTable"
-				emptyMessage="Nenhum empréstimo encontrado nessa categoria">
+				emptyMessage="Nenhum empréstimo encontrado nessa categoria"
+				paginator="true" rows="10">
 
 				<p:column filterBy="#{emprestimo.pessoa.nome}" headerText="Nome"
 					filterMatchMode="contains" sortBy="#{emprestimo.pessoa.nome}">
@@ -61,7 +62,7 @@
 						</p:selectOneButton>
 					</f:facet>
 					<h:outputText
-						value="#{emprestimo.devolvido ? 'Devolvido': 'Pendente'}" />
+						value="#{emprestimo.devolvido ? 'Devolvido' : 'Pendente'}" />
 				</p:column>
 				<p:column>
 					<p:commandButton value="Efetuar devolução"

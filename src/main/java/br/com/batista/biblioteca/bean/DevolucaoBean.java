@@ -2,6 +2,8 @@ package br.com.batista.biblioteca.bean;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,7 +16,7 @@ import br.com.batista.biblioteca.modelo.Emprestimo;
 
 @Named
 @ViewScoped
-public class DevolucaoBean implements Serializable{
+public class DevolucaoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Emprestimo emprestimo;
@@ -27,6 +29,9 @@ public class DevolucaoBean implements Serializable{
 	@Inject
 	private DevolucaoDAO devolucaoDao;
 
+	@Inject
+	private FacesContext facesContext;
+
 	public void carregaEmprestimo() {
 		this.emprestimo = emprestimoDao.buscaPorId(id);
 		devolucao.setEmprestimo(emprestimo);
@@ -35,6 +40,10 @@ public class DevolucaoBean implements Serializable{
 	@Transactional
 	public String efetuaDevolucao() {
 		devolucaoDao.salvar(devolucao);
+		
+		facesContext.getExternalContext().getFlash().setKeepMessages(true);
+		facesContext.addMessage(null, new FacesMessage("Devolução efetuada com sucesso"));
+		
 		return "/sistema/historico?faces-redirect=true";
 	}
 

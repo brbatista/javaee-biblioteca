@@ -22,7 +22,7 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<p:messages></p:messages>
+		<p:growl id="mensagem" showDetail="false" />
 		<div class="container">
 			<p:fieldset legend="Dados do devedor">
 				<p:panelGrid columns="2" styleClass="ui-noborder">
@@ -77,6 +77,7 @@
 				<p:calendar id="dataDevolucao"
 					value="#{devolucaoBean.devolucao.dataDevolucao.time}"
 					pattern="dd/MM/yyyy" timeZone="America/Brasilia" mask="true" />
+					<p:message for="dataDevolucao"/>
 				<p:commandButton action="#{devolucaoBean.efetuaDevolucao()}"
 					value="Efetuar devolução" />
 			</h:form>

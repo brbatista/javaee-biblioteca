@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Livro implements Serializable{
@@ -36,6 +37,7 @@ public class Livro implements Serializable{
 	private String descricao;
 	
 	@Min(100)
+	@NotNull
 	private int numeroPaginas;
 
 	@Temporal(TemporalType.DATE)
@@ -46,6 +48,7 @@ public class Livro implements Serializable{
 	private String isbn;
 
 	@ManyToMany
+	@NotEmpty
 	@Size(min = 1)
 	private List<Autor> autores = new ArrayList<Autor>();
 	
