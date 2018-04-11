@@ -6,11 +6,11 @@ Sistema de bilbioteca para controle e registro de livros, autores, pessoas, empr
 
 Tecnologias que foram usadas na aplicação: 
 
- •	CDI;<br>
- •	JPA/Hibernate;<br>
- •	JSF;<br>
- •	PrimeFaces;<br>
- •	Maven.
+   -	CDI;
+   -	JPA/Hibernate;
+   -	JSF;
+   -	PrimeFaces;
+   -	Maven.
 
 
   
