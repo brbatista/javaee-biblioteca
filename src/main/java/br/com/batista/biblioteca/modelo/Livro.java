@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Livro implements Serializable {
@@ -28,22 +27,20 @@ public class Livro implements Serializable {
 	private Integer id;
 
 	@NotBlank
-	@NotNull
 	private String titulo;
 
 	@Lob
 	@NotBlank
-	@NotNull
 	private String descricao;
 
 	@Min(100)
 	private int numeroPaginas;
 
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Calendar dataPublicacao = Calendar.getInstance();
 
 	@NotBlank
-	@NotNull
 	private String isbn;
 
 	@ManyToMany
